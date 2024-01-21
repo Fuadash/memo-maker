@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
-public class MainTest {
+public class TestFolderManager {
     @Test
     void testCreateFolders() throws IOException {
         String folderPath = MemoConfig.getBasePath() + "logs";

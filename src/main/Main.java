@@ -1,6 +1,7 @@
 package main;
 
 import main.classes.MemoLogger;
+import main.classes.MultiDate;
 
 import java.util.Scanner;
 
@@ -29,7 +30,7 @@ public class Main {
             System.out.print("What to add to the memo: ");
             String input = scanner.nextLine();
 
-            MemoLogger.logMemo(input);
+            MemoLogger.logMemo(input, new MultiDate());
         }
     }
 

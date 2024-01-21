@@ -6,19 +6,18 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class MemoLogger {
-    public static void logMemo(String input) {
-        MultiDate currentMulti = new MultiDate();
+    public static void logMemo(String input, MultiDate logDate) {
 
         // Gets the base path based on APP_ENV
         String basePath = MemoConfig.getBasePath();
 
         FolderManager.ensureFolderExists(basePath + "logs");
-        boolean createdFolder = FolderManager.ensureFolderExists(basePath + "logs/" + currentMulti.month);
+        boolean createdFolder = FolderManager.ensureFolderExists(basePath + "logs/" + logDate.month);
 
-        String fileName = basePath + "logs/" + currentMulti.month + "/memo_" + currentMulti.date + ".txt";
+        String fileName = basePath + "logs/" + logDate.month + "/memo_" + logDate.date + ".txt";
 
         if (createdFolder) {
-            addToMemo(fileName, input, currentMulti.time);
+            addToMemo(fileName, input, logDate.time);
         } else {
             System.err.println("Failed to make the folder for whatever reason idk");
         }
