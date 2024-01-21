@@ -1,5 +1,5 @@
 package test;
-import main.Main;
+import main.classes.FolderManager;
 import main.classes.MemoConfig;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class MainTest {
     @Test
     void testCreateFolders() throws IOException {
         String folderPath = MemoConfig.getBasePath() + "logs";
-        Main.ensureFolderExists(folderPath);
+        FolderManager.ensureFolderExists(folderPath);
 
         Path folderPathObject = Path.of(folderPath);
         assertTrue(Files.exists(folderPathObject));
