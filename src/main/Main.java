@@ -8,12 +8,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         //TODO: Add tests
-        //TODO: A way to search memos
-        //TODO: Do I need an edit/delete functionality? It's probably more work than doing it manually
+        //TODO: A way to search memos for strings of text, add regex functionality too, think about how many results to return
         //TODO: Better error handling?
         //TODO: Add some way to mark a day as important then give it visibility
         //TODO: Tagging memos with certain inputs so you can search them later sounds like a vibe? But maybe this is included under search already?
-        //TODO: Export
+        //TODO: Export to...?
         //TODO: Displaying memos probably is something that could be done
         //TODO: Make it work from my phone, gonna need to have it running on a server or something idk
         //TODO: Make the memos markdown files?
