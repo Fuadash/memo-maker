@@ -1,6 +1,4 @@
 package test;
-import main.classes.FolderManager;
-import main.classes.MemoConfig;
 import main.classes.MemoLogger;
 import main.classes.MultiDate;
 import org.junit.jupiter.api.AfterEach;
@@ -8,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,7 +13,6 @@ import java.nio.file.Path;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,8 +41,6 @@ public class TestMemoLogger {
 
         // Make the paths to the various folders that are created here
         Path pathToMemoFile = Path.of("./test/logs/1988-03/memo_1988-03-01.txt");
-        Path pathToMonthFolder = Path.of("./test/logs/1988-03");
-        Path pathToLogsFolder = Path.of("./test/logs");
 
         // Check the memo file itself exists
         assertTrue(Files.exists(pathToMemoFile));
@@ -66,8 +60,6 @@ public class TestMemoLogger {
 
         // Make the paths to the various folders that are created here
         Path pathToMemoFile = Path.of("./test/logs/1988-03/memo_1988-03-01.txt");
-        Path pathToMonthFolder = Path.of("./test/logs/1988-03");
-        Path pathToLogsFolder = Path.of("./test/logs");
 
         // Check the memo file itself exists
         try(BufferedReader reader = new BufferedReader(new FileReader(String.valueOf(pathToMemoFile)))){
@@ -85,9 +77,10 @@ public class TestMemoLogger {
 
     @AfterEach
     public void cleanup() {
-        // Deletes everything under logDirectory
         String currentDir = System.getProperty("user.dir");
         File logDirectory = new File("./test/logs");
+
+        // Safety Checks as we're doing a destructive process
         if(currentDir.endsWith("src") && logDirectory.exists()){
             System.out.println("Cleaning up.");
             recursiveDelete(logDirectory);

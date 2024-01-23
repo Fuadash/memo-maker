@@ -3,6 +3,8 @@ package main.classes;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class MemoLogger {
@@ -11,15 +13,25 @@ public class MemoLogger {
         // Gets the base path based on APP_ENV
         String basePath = MemoConfig.getBasePath();
 
-        FolderManager.ensureFolderExists(basePath + "logs");
-        boolean createdFolder = FolderManager.ensureFolderExists(basePath + "logs/" + logDate.month);
+        // Check if the folders that are required exist, and create them if not
+        boolean createdFolders = FolderManager.ensureFolderExists(basePath + "logs") &&
+                FolderManager.ensureFolderExists(basePath + "logs/" + logDate.month);
 
-        String fileName = basePath + "logs/" + logDate.month + "/memo_" + logDate.date + ".txt";
-
-        if (createdFolder) {
+        if (createdFolders) {
+            String fileName = basePath + "logs/" + logDate.month + "/memo_" + logDate.date + ".txt";
             addToMemo(fileName, input, logDate.time);
+
+            // Check for importance, add to important folder if it is important
+            if (isImportantInput(input) || isImportantMemo(logDate)) {
+                if (FolderManager.ensureFolderExists(basePath + "logs/important")) {
+                    String importantFileName = basePath + "logs/important/memo_" + logDate.date + ".txt";
+                    addToMemo(importantFileName, input, logDate.time);
+                } else {
+                    System.err.println("Failed to make the important folder"); //TODO: BETTER ERROR HANDLING
+                }
+            }
         } else {
-            System.err.println("Failed to make the folder for whatever reason idk");
+            System.err.println("Failed to make the logs folder for the month, for some reason"); //TODO: BETTER ERROR HANDLING
         }
     }
 
@@ -32,7 +44,7 @@ public class MemoLogger {
             }
 
             writer.write(currentTime + " - " + input);
-            System.out.println("New entry added at " + fileName);
+            System.out.println("New entry added at " + Path.of(fileName).toAbsolutePath().normalize());
 
         } catch (IOException e) {
             System.err.println("Error appending to the text document: " + e.getMessage());
@@ -48,5 +60,15 @@ public class MemoLogger {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private static boolean isImportantInput(String input){
+        return input.toLowerCase().contains("!important");
+    }
+
+    private static boolean isImportantMemo(MultiDate memoMultiDate){
+        String basePath = MemoConfig.getBasePath();
+        Path memoPath = Path.of(basePath + "logs/important/memo_" + memoMultiDate.date + ".txt");
+        return Files.exists(memoPath);
     }
 }
