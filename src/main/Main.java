@@ -1,5 +1,6 @@
 package main;
 
+import main.classes.MemoController;
 import main.classes.MemoLogger;
 import main.classes.MultiDate;
 
@@ -10,7 +11,7 @@ public class Main {
         //TODO: Implement the memocontroller and memosearcher, memocontroller probably parses searchMemosFor
         //TODO: A way to search memos for strings of text, add regex functionality too, think about how many results to return
         //TODO: Make the memos markdown files?
-        //TODO: Add tests
+        //TODO: Add tests for all classes
         //TODO: Better error handling?
         //TODO: Tagging memos with certain inputs so you can search them later sounds like a vibe? But maybe this is included under search already?
         //TODO: Export to...?
@@ -29,7 +30,7 @@ public class Main {
             System.out.print("What to add to the memo: ");
             String input = scanner.nextLine();
 
-            MemoLogger.logMemo(input, new MultiDate());
+            MemoController.parseInput(input);
             // TODO: Send the input to memocontroller instead
         }
     }
