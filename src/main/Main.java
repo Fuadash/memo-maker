@@ -7,11 +7,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //TODO: Add some way to mark a day as important then give it visibility
-        //TODO: output absolute file paths
+        //TODO: Implement the memocontroller and memosearcher, memocontroller probably parses searchMemosFor
+        //TODO: A way to search memos for strings of text, add regex functionality too, think about how many results to return
         //TODO: Make the memos markdown files?
         //TODO: Add tests
-        //TODO: A way to search memos for strings of text, add regex functionality too, think about how many results to return
         //TODO: Better error handling?
         //TODO: Tagging memos with certain inputs so you can search them later sounds like a vibe? But maybe this is included under search already?
         //TODO: Export to...?
@@ -31,6 +30,7 @@ public class Main {
             String input = scanner.nextLine();
 
             MemoLogger.logMemo(input, new MultiDate());
+            // TODO: Send the input to memocontroller instead
         }
     }
 

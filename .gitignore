@@ -1,6 +1,7 @@
 ### Actual Stuff ###
 logs/*
 memo_*.txt
+*.env
 
 ### IntelliJ IDEA ###
 out/

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 // Searches and returns memos
 public class MemoSearcher {
-    public static List<Path> searchFilesFor(Path root, String target) {
+    public static List<Path> searchMemosFor(Path root, String target) {
         List<Path> matchingFiles = new ArrayList<>();
 
         // Add all folders under the root folder to a stream
