@@ -1,14 +1,12 @@
 package main;
 
 import main.classes.MemoController;
-import main.classes.MemoLogger;
-import main.classes.MultiDate;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //TODO: Implement the memocontroller and memosearcher, memocontroller probably parses searchMemosFor
+        //TODO: AI summary feature I GUESS
         //TODO: A way to search memos for strings of text, add regex functionality too, think about how many results to return
         //TODO: Make the memos markdown files?
         //TODO: Add tests for all classes
@@ -19,7 +17,6 @@ public class Main {
         //TODO: Make it work from my phone, gonna need to have it running on a server or something idk
         //TODO: Make it possible to enter memos at different times other than the current moment
         //TODO: Maybe a way to set alarms/notifications/get emailed at a certain time if you set an alarm memo in the future
-        //TODO: AI summary feature I GUESS
         //TODO: Let it ask for multiple memos
         //TODO: "Automatically capture certain system events (e.g., shutdown, startup) and log them as memos" sounds interesting?
         //TODO: Memo shortcuts so I can repeat memos with quick inputs
@@ -27,11 +24,11 @@ public class Main {
         //TODO: Discord webhook or something
 
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("What to add to the memo: ");
+            //TODO: Instructions
+            System.out.print("What is your command: ");
             String input = scanner.nextLine();
 
             MemoController.parseInput(input);
-            // TODO: Send the input to memocontroller instead
         }
     }
 
