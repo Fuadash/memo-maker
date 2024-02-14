@@ -12,8 +12,8 @@ public class MemoConfig {
         Optional<String> env = Optional.ofNullable(System.getenv("APP_ENV"));
         env.ifPresentOrElse(appEnv -> {
             // Gets the appropriate config file
-            try (InputStream input = MemoConfig.class.getClassLoader().getResourceAsStream("resources/" + appEnv + "/config.properties")) {
-                properties.load(input);
+            try (InputStream resources = MemoConfig.class.getClassLoader().getResourceAsStream("resources/" + appEnv + "/config.properties")) {
+                properties.load(resources);
             } catch (IOException e) {
                 e.printStackTrace();
             }

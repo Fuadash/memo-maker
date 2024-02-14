@@ -12,6 +12,9 @@ public class MemoController {
             List<Path> pathToMemos = MemoSearcher.searchMemosFor(root, searchTarget);
             pathToMemos.forEach(System.out::println); //TODO: Make this only print like 10 at a time, maybe move into a memoprinter class
         }
+        else if (input.toLowerCase().startsWith("!gpt")){
+            System.out.println(GPTSummary.getSummary());
+        }
         else {
             MemoLogger.logMemo(input, new MultiDate());
         }
