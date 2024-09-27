@@ -10,7 +10,15 @@ public class GPTSummary {
 
     public static String getSummary() {
         //TODO: Make the prompt actually the content of the memos, before that I guess just make the tech for printing whole memo files
-        String prompt = "Print a summary of the happenings of the world in 1942";
+        MemoPrinter printer = new MemoPrinter();
+        String memoContent = printer.getAll();
+        String prePrompt = "The following can be considered diary entries or notes or memos, they will " +
+                "be listed with dates and times under those dates, your task is to analyse these and come up with " +
+                "a summary and any interesting insights you may have based on the data you are fed in: \n";
+        String prompt = prePrompt + memoContent;
+        //String prompt = "Print a summary of the happenings of the world in 1942";
+        String fixedPrompt = prompt.replaceAll("\\r?\\n", " ");
+        System.out.println("Prompt: " + fixedPrompt);
 
         HttpURLConnection connection = null;
 
@@ -33,7 +41,7 @@ public class GPTSummary {
                 connection.setRequestProperty("Authorization", "Bearer " + apiKey);
 
                 // Request body
-                String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + prompt + "\"}]}";
+                String body = "{\"model\": \"" + model + "\", \"messages\": [{\"role\": \"user\", \"content\": \"" + fixedPrompt + "\"}]}";
 
                 // Make the request
                 connection.setDoOutput(true);
